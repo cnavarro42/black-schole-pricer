@@ -1,0 +1,25 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "with-tests",
+      "displayName": "Build with Tests",
+      "generator": "MinGW Makefiles",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "g++",
+        "BUILD_TESTING": "ON"
+      }
+    },
+    {
+      "name": "no-tests",
+      "displayName": "Build Only (No Tests)",
+      "generator": "MinGW Makefiles",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "g++",
+        "BUILD_TESTING": "OFF"
+      }
+    }
+  ]
+}
