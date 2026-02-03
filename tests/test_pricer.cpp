@@ -40,3 +40,18 @@ TEST(Pricer, CallAndPutHaveDifferentPrices)
     double putPrice = pricer.price(put, marketData);
     EXPECT_NE(callPrice, putPrice);
 }
+
+TEST(Pricer, CallPriceIncreaseWithSpotPrice)
+{
+    Option call{OptionType::Call, 100.0, 1.0};
+
+    MarketData marketDataLow{90.0, 0.05, 0.2};
+    MarketData marketDataHigh{110.0, 0.05, 0.2};
+
+    BlackScholesPricer pricer;
+
+    double lowPrice = pricer.price(call, marketDataLow);
+    double highPrice = pricer.price(call, marketDataHigh);
+
+    EXPECT_LT(lowPrice, highPrice);
+}
