@@ -10,6 +10,7 @@ target_include_directories(tests_runner
 
 
 target_link_libraries(tests_runner
+    pricer
     GTest::gtest
     GTest::gtest_main
 )

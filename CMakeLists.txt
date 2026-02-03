@@ -8,6 +8,15 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 option(BUILD_TESTING "Build tests" ON)
 
+add_library(pricer
+    src/BlackScholesPricer.cpp
+)
+
+target_include_directories(pricer
+    PUBLIC
+        ${PROJECT_SOURCE_DIR}/include
+)
+
 if(BUILD_TESTING)
     include(FetchContent)
 
