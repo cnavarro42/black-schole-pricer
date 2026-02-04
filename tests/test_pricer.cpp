@@ -115,3 +115,18 @@ TEST(Pricer, CallPriceIncreaseWithVolatility)
 
     EXPECT_LT(lowVolPrice, highVolPrice);
 }
+
+TEST(Pricer, PutPriceIncreaseWithVolatility)
+{
+    Option put{OptionType::Put, 100.0, 1.0};
+
+    MarketData marketDataLowVol{150.0, 0.05, 0.1};
+    MarketData marketDataHighVol{150.0, 0.05, 0.3};
+
+    BlackScholesPricer pricer;
+
+    double lowVolPrice = pricer.price(put, marketDataLowVol);
+    double highVolPrice = pricer.price(put, marketDataHighVol);
+
+    EXPECT_LT(lowVolPrice, highVolPrice);
+}
