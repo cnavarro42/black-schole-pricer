@@ -8,6 +8,6 @@ double BlackScholesPricer::price(const Option& option, const MarketData& marketD
     }
     else // Put option
     {
-        return 5.0; // Dummy for put
+        return -marketData.spotPrice; // Dummy for put
     }
 }
