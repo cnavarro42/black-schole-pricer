@@ -4,7 +4,7 @@ double BlackScholesPricer::price(const Option& option, const MarketData& marketD
 {
     if (option.type() == OptionType::Call)
     {
-        return marketData.spotPrice; // Dummy for call
+        return marketData.spotPrice / (option.strike()); // Dummy for call
     }
     else // Put option
     {
