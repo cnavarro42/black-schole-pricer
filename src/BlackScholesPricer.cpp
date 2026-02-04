@@ -8,6 +8,6 @@ double BlackScholesPricer::price(const Option& option, const MarketData& marketD
     }
     else // Put option
     {
-        return  std::max(option.strike() - marketData.spotPrice, 0.0) * marketData.volatility; // Dummy for put
+        return  std::max(option.strike() - marketData.spotPrice, 0.0) * marketData.volatility * option.maturity(); // Dummy for put
     }
 }
