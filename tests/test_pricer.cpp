@@ -105,8 +105,8 @@ TEST(Pricer, CallPriceIncreaseWithVolatility)
 {
     Option call{OptionType::Call, 100.0, 1.0};
 
-    MarketData marketDataLowVol{100.0, 0.05, 0.1};
-    MarketData marketDataHighVol{100.0, 0.05, 0.3};
+    MarketData marketDataLowVol{150.0, 0.05, 0.1};
+    MarketData marketDataHighVol{150.0, 0.05, 0.3};
 
     BlackScholesPricer pricer;
 

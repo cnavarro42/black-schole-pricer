@@ -4,7 +4,7 @@ double BlackScholesPricer::price(const Option& option, const MarketData& marketD
 {
     if (option.type() == OptionType::Call)
     {
-        return std::max(marketData.spotPrice - option.strike(), 0.0); // Dummy for call
+        return std::max(marketData.spotPrice - option.strike(), 0.0) * marketData.volatility; // Dummy for call
     }
     else // Put option
     {
