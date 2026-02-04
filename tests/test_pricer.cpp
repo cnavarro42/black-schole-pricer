@@ -145,3 +145,18 @@ TEST(Pricer, CallPriceIncreaseWithMaturity)
 
     EXPECT_LT(shortMaturityPrice, longMaturityPrice);
 }
+
+TEST(Pricer, PutPriceIncreaseWithMaturity)
+{
+    Option shortMaturityPut{OptionType::Put, 100.0, 0.5};
+    Option longMaturityPut{OptionType::Put, 100.0, 2.0};
+
+    MarketData marketData{80.0, 0.05, 0.2};
+
+    BlackScholesPricer pricer;
+
+    double shortMaturityPrice = pricer.price(shortMaturityPut, marketData);
+    double longMaturityPrice = pricer.price(longMaturityPut, marketData);
+
+    EXPECT_LT(shortMaturityPrice, longMaturityPrice);
+}
