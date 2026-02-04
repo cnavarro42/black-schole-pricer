@@ -160,3 +160,18 @@ TEST(Pricer, PutPriceIncreaseWithMaturity)
 
     EXPECT_LT(shortMaturityPrice, longMaturityPrice);
 }
+
+TEST(Pricer, CallPriceIncreaseWithRiskFreeRate)
+{
+    Option call{OptionType::Call, 100.0, 1.0};
+
+    MarketData marketDataLowRate{100.0, 0.01, 0.2};
+    MarketData marketDataHighRate{100.0, 0.10, 0.2};
+
+    BlackScholesPricer pricer;
+
+    double lowRatePrice = pricer.price(call, marketDataLowRate);
+    double highRatePrice = pricer.price(call, marketDataHighRate);
+
+    EXPECT_LT(lowRatePrice, highRatePrice);
+}
