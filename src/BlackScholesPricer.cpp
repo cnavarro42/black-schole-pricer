@@ -1,13 +1,13 @@
 #include "pricer/BlackScholesPricer.hpp"
-
+#include <iostream>
 double BlackScholesPricer::price(const Option& option, const MarketData& marketData) const
 {
     if (option.type() == OptionType::Call)
     {
-        return marketData.spotPrice / (option.strike()); // Dummy for call
+        return std::max(marketData.spotPrice - option.strike(), 0.0); // Dummy for call
     }
     else // Put option
     {
-        return -marketData.spotPrice; // Dummy for put
+        return  std::max(option.strike() - marketData.spotPrice, 0.0); // Dummy for put
     }
 }
