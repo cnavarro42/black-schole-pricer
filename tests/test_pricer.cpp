@@ -85,3 +85,18 @@ TEST(Pricer, CallPriceDecreasewithStrike)
 
     EXPECT_GT(lowStrikePrice, highStrikePrice);
 }
+
+TEST(Pricer, PutPriceIncreasewithStrike)
+{
+    Option putLowStrike{OptionType::Put, 90.0, 1.0};
+    Option putHighStrike{OptionType::Put, 110.0, 1.0};
+
+    MarketData marketData{100.0, 0.05, 0.2};
+
+    BlackScholesPricer pricer;
+
+    double lowStrikePrice = pricer.price(putLowStrike, marketData);
+    double highStrikePrice = pricer.price(putHighStrike, marketData);
+
+    EXPECT_LT(lowStrikePrice, highStrikePrice);
+}
