@@ -214,3 +214,15 @@ TEST(Pricer, PutCallParity)
 
     EXPECT_NEAR(lhs, rhs, 1e-2);
 }
+
+TEST(Pricer, ZeroTimeToMaturityReturnsIntrinsic)
+{
+    Option call{OptionType::Call, 100.0, 0.0};
+    Option put{OptionType::Put, 100.0, 0.0};
+    MarketData marketData{120.0, 0.05, 0.2};
+
+    BlackScholesPricer pricer;
+
+    EXPECT_DOUBLE_EQ(pricer.price(call, marketData), 20.0);
+    EXPECT_DOUBLE_EQ(pricer.price(put, marketData), 0.0);
+}
