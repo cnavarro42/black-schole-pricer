@@ -130,3 +130,18 @@ TEST(Pricer, PutPriceIncreaseWithVolatility)
 
     EXPECT_LT(lowVolPrice, highVolPrice);
 }
+
+TEST(Pricer, CallPriceIncreaseWithMaturity)
+{
+    Option shortMaturityCall{OptionType::Call, 100.0, 0.5};
+    Option longMaturityCall{OptionType::Call, 100.0, 2.0};
+
+    MarketData marketData{120.0, 0.05, 0.2};
+
+    BlackScholesPricer pricer;
+
+    double shortMaturityPrice = pricer.price(shortMaturityCall, marketData);
+    double longMaturityPrice = pricer.price(longMaturityCall, marketData);
+
+    EXPECT_LT(shortMaturityPrice, longMaturityPrice);
+}
