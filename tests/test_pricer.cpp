@@ -120,8 +120,8 @@ TEST(Pricer, PutPriceIncreaseWithVolatility)
 {
     Option put{OptionType::Put, 100.0, 1.0};
 
-    MarketData marketDataLowVol{150.0, 0.05, 0.1};
-    MarketData marketDataHighVol{150.0, 0.05, 0.3};
+    MarketData marketDataLowVol{50.0, 0.05, 0.1};
+    MarketData marketDataHighVol{50.0, 0.05, 0.3};
 
     BlackScholesPricer pricer;
 
