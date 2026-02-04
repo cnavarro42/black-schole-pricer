@@ -4,6 +4,8 @@
 #include "pricer/Option.hpp"
 #include "pricer/MarketData.hpp"
 
+#include <cmath>
+
 TEST(Pricer, CanPriceAnOption)
 {
     Option call{OptionType::Call, 100.0, 1.0};
@@ -151,7 +153,7 @@ TEST(Pricer, PutPriceIncreaseWithMaturity)
     Option shortMaturityPut{OptionType::Put, 100.0, 0.5};
     Option longMaturityPut{OptionType::Put, 100.0, 2.0};
 
-    MarketData marketData{80.0, 0.05, 0.2};
+    MarketData marketData{120.0, 0.05, 0.2};
 
     BlackScholesPricer pricer;
 
@@ -160,6 +162,7 @@ TEST(Pricer, PutPriceIncreaseWithMaturity)
 
     EXPECT_LT(shortMaturityPrice, longMaturityPrice);
 }
+
 
 TEST(Pricer, CallPriceIncreaseWithRiskFreeRate)
 {
@@ -189,4 +192,25 @@ TEST(Pricer, PutPriceDecreaseWithRiskFreeRate)
     double highRatePrice = pricer.price(put, marketDataHighRate);
 
     EXPECT_GT(lowRatePrice, highRatePrice);
+}
+
+TEST(Pricer, PutCallParity)
+{
+    double strike = 100.0;
+    double maturity = 1.0;
+
+    Option call{OptionType::Call, strike, maturity};
+    Option put{OptionType::Put, strike, maturity};
+
+    MarketData marketData{100.0, 0.05, 0.2};
+
+    BlackScholesPricer pricer;
+
+    double callPrice = pricer.price(call, marketData);
+    double putPrice = pricer.price(put, marketData);
+
+    double lhs = callPrice - putPrice;
+    double rhs = marketData.spotPrice - strike * exp(-marketData.riskFreeRate * maturity);
+
+    EXPECT_NEAR(lhs, rhs, 1e-2);
 }
