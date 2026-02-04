@@ -175,3 +175,18 @@ TEST(Pricer, CallPriceIncreaseWithRiskFreeRate)
 
     EXPECT_LT(lowRatePrice, highRatePrice);
 }
+
+TEST(Pricer, PutPriceDecreaseWithRiskFreeRate)
+{
+    Option put{OptionType::Put, 100.0, 1.0};
+
+    MarketData marketDataLowRate{80.0, 0.01, 0.2};
+    MarketData marketDataHighRate{80.0, 0.10, 0.2};
+
+    BlackScholesPricer pricer;
+
+    double lowRatePrice = pricer.price(put, marketDataLowRate);
+    double highRatePrice = pricer.price(put, marketDataHighRate);
+
+    EXPECT_GT(lowRatePrice, highRatePrice);
+}
