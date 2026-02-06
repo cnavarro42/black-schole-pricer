@@ -1,0 +1,24 @@
+# --- CMake ---
+build/
+
+# --- IDEs y Editores ---
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+.history/
+
+# --- Compiladores y Binarios ---
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.exe
+
+# --- MSYS2 / MinGW ---
+*.pyc
+.cache/
+
+# --- Google Test ---
+_deps/

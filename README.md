@@ -1,2 +1,2 @@
 # black-schole-pricer
-A simple black-schole app with unit tests and CI
+C++ implementation of a Black–Scholes-based option pricer, with CMake, unit tests in GoogleTest, and CI using GitHub Actions.
