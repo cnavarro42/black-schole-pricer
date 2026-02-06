@@ -33,3 +33,6 @@ if(BUILD_TESTING)
     enable_testing()
     add_subdirectory(tests)
 endif()
+
+add_executable(pricer_app src/main.cpp)
+target_link_libraries(pricer_app pricer)
